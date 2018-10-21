@@ -1,2 +1,2 @@
-# online-user-registry
-Java registry that tracks which online user is connected to which edge service instance.
+# jrashack-online-registry
+Small java library that will hold references which connection is assocated with which node in service cluster.
