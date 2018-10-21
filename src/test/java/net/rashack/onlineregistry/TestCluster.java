@@ -33,7 +33,9 @@ public class TestCluster {
 	@Test
 	public void testCommingOnline() {
 		assertThat(first.tryToComeOnline("connection-01"), equalTo(true));
+		assertThat(first.isOnlineHere("connection-01"), equalTo(true));
 		assertThat(second.isOnline("connection-01"), equalTo(true));
+		assertThat(second.isOnlineHere("connection-01"), equalTo(false));
 	}
 	
 	@Test
