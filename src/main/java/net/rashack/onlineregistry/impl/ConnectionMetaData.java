@@ -1,4 +1,4 @@
-package net.rashack.onlineregistry.data;
+package net.rashack.onlineregistry.impl;
 
 import java.io.Serializable;
 
