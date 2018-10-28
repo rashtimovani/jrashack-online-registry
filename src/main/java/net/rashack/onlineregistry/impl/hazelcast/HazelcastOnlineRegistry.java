@@ -119,12 +119,15 @@ public final class HazelcastOnlineRegistry<T extends Serializable> implements On
 	}
 
 	@Override
-	public void wentOffline(final T connectionId) {
+	public boolean wentOffline(final T connectionId) {
 		final ConnectionMetaData online = registryMap.getOrDefault(connectionId, NOT_ONLINE);
 		if (online.getOwner()
 				.equals(getOwnerUuid()) && registryMap.remove(connectionId, online)) {
 			disconnect(instance.getCluster()
 					.getLocalMember(), connectionId);
+			return true;
 		}
+
+		return false;
 	}
 }

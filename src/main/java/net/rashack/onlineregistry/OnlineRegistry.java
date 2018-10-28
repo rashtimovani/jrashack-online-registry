@@ -24,5 +24,5 @@ public interface OnlineRegistry<T extends Serializable> {
 
 	boolean isOnline(final T connectionId);
 
-	void wentOffline(T connectionId);
+	boolean wentOffline(T connectionId);
 }
