@@ -2,7 +2,9 @@ package net.rashack.onlineregistry.listener;
 
 import java.io.Serializable;
 
-public interface WentOfflineListener<T extends Serializable> {
+import net.rashack.onlineregistry.OnlineEntity;
 
-	void wentOffline(T connectionId);
+public interface WentOfflineListener<T extends Serializable, U extends Serializable> {
+
+	void wentOffline(OnlineEntity<T, U> whoWentOffline);
 }

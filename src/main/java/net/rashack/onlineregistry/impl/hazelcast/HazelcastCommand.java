@@ -10,14 +10,14 @@ import com.hazelcast.logging.ILogger;
 
 import net.rashack.onlineregistry.listener.WentOfflineListener;
 
-public abstract class HazelcastCommand<T extends Serializable>
+public abstract class HazelcastCommand<T extends Serializable, U extends Serializable>
 		implements HazelcastInstanceAware, Runnable, Serializable {
 	private static final long serialVersionUID = -1555356959538490543L;
 
 	private final String keyType;
 
 	private transient HazelcastInstance instance;
-	protected transient Optional<HazelcastOnlineRegistry<T>> registry;
+	protected transient Optional<HazelcastOnlineRegistry<T, U>> registry;
 
 	protected HazelcastCommand(final String keyType) {
 		this.keyType = keyType;
@@ -32,10 +32,10 @@ public abstract class HazelcastCommand<T extends Serializable>
 	public final void setHazelcastInstance(final HazelcastInstance instance) {
 		this.instance = instance;
 
-		registry = new HazelcastContextHandler<T>(instance.getUserContext()).getExisting(keyType);
+		registry = new HazelcastContextHandler<T, U>(instance.getUserContext()).getExisting(keyType);
 	}
 
-	protected Collection<WentOfflineListener<T>> wentOfflineListeners(final HazelcastOnlineRegistry<T> registry) {
+	protected Collection<WentOfflineListener<T, U>> wentOfflineListeners(final HazelcastOnlineRegistry<T, U> registry) {
 		return registry.wentOfflineListenersReadOnly;
 	}
 }
